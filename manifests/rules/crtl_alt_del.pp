@@ -4,8 +4,8 @@
 # The operating system must disable the x86 Ctrl-Alt-Delete key sequence.
 #
 # Rationale:
-# A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally 
-# pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of 
+# A locally logged-on user who presses Ctrl-Alt-Delete, when at the console, can reboot the system. If accidentally
+# pressed, as could happen in the case of a mixed OS environment, this can create the risk of short-term loss of
 # availability of systems due to unintentional reboot.
 #
 # @param enforce
@@ -28,7 +28,7 @@ class cis_security_hardening::rules::crtl_alt_del (
       notify  => Exec['systemd-daemon-reload'],
     }
 
-    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= '8' {
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] >= 8 {
       file_line { 'ctrl-alt-del-burst':
         ensure             => present,
         path               => '/etc/systemd/system.conf',

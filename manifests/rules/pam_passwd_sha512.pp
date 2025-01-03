@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure password hashing algorithm is SHA-512 
+# @summary
+#    Ensure password hashing algorithm is SHA-512
 #
-# The commands below change password encryption from md5 to sha512 (a much stronger hashing algorithm). All 
+# The commands below change password encryption from md5 to sha512 (a much stronger hashing algorithm). All
 # existing accounts will need to perform a password change to upgrade the stored hashes to the new algorithm.
 #
 # Rationale:
-# The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system by 
+# The SHA-512 algorithm provides much stronger hashing than MD5, thus providing additional protection to the system by
 # increasing the level of effort for an attacker to successfully determine passwords.
 #
 # Note that these change only apply to accounts configured on the local system.
@@ -13,7 +13,7 @@
 # This rule is done together with sec_pam_old_passwords
 #
 # @param enforce
-#    Enforce the rule 
+#    Enforce the rule
 #
 # @example
 #   class { 'cis_security_hardening::rules::pam_passwd_sha512':
@@ -32,7 +32,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
 
     case $facts['os']['family'].downcase() {
       'redhat': {
-        if $facts['os']['release']['major'] > '7' {
+        if $facts['os']['release']['major'] > 7 {
           $profile = fact('cis_security_hardening.authselect.profile')
           if $profile != undef and $profile != 'none' {
             $pf_path = "/etc/authselect/custom/${profile}"
@@ -65,7 +65,7 @@ class cis_security_hardening::rules::pam_passwd_sha512 (
         }
       }
       'debian': {
-        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') {
+        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > 10) {
           $keyring = fact('cis_security_hardening.gnome_keyring.installed')
           $src_file = fact('cis_security_hardening.gnome_keyring.installed') ? {
             default  => 'puppet:///modules/cis_security_hardening/pam_lockout/debian/common-password',

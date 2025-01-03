@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure gpgcheck is globally activated 
+# @summary
+#    Ensure gpgcheck is globally activated
 #
-# The gpgcheck option, found in the main section of the /etc/yum.conf and individual /etc/yum/repos.d/* 
+# The gpgcheck option, found in the main section of the /etc/yum.conf and individual /etc/yum/repos.d/*
 # files determines if an RPM package's signature is checked prior to its installation.
 #
 # Rationale:
-# It is important to ensure that an RPM's package signature is always checked prior to installation to 
+# It is important to ensure that an RPM's package signature is always checked prior to installation to
 # ensure that the software is obtained from a trusted source.
 #
 # @param enforce
@@ -28,7 +28,7 @@ class cis_security_hardening::rules::yum_gpgcheck (
       match  => '^gpgcheck',
     }
 
-    if $facts['os']['release']['major'] > '7' {
+    if $facts['os']['release']['major'] > 7 {
       file_line { 'yum_gpgcheck dnf':
         ensure => present,
         path   => '/etc/dnf/dnf.conf',

@@ -57,7 +57,7 @@ class cis_security_hardening (
 
   $base_dir = '/usr/share/cis_security_hardening'
 
-  if $remove_authconfig and $facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+  if $remove_authconfig and $facts['os']['family'].downcase() == 'redhat' and $facts['os']['release']['major'] == 7 {
     $ensure = $facts['os']['family'].downcase() ? {
       'suse'  => 'absent',
       default => 'purged',

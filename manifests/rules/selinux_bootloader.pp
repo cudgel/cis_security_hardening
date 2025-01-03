@@ -1,5 +1,5 @@
-# @summary 
-#    Ensure SELinux is not disabled in bootloader configuration 
+# @summary
+#    Ensure SELinux is not disabled in bootloader configuration
 #
 # Configure SELINUX to be enabled at boot time and verify that it has not been overwritten by the grub boot parameters.
 #
@@ -20,7 +20,7 @@ class cis_security_hardening::rules::selinux_bootloader (
 ) {
   if $enforce {
     case $facts['os']['release']['major'] {
-      '7', '8': {
+      7, 8: {
         file_line { 'cmdline_definition':
           line   => 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"',
           path   => '/etc/default/grub',

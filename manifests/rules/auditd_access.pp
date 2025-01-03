@@ -1,16 +1,16 @@
-# @summary 
-#    Ensure unsuccessful unauthorized file access attempts are collected 
+# @summary
+#    Ensure unsuccessful unauthorized file access attempts are collected
 #
-# Monitor for unsuccessful attempts to access files. The parameters below are associated with 
-# system calls that control creation ( creat ), opening ( open , openat ) and truncation 
-# ( truncate , ftruncate ) of files. An audit log record will only be written if the user is a 
-# non- privileged user (auid >= 1000), is not a Daemon event (auid=4294967295) and if the 
-# system call returned EACCES (permission denied to the file) or EPERM (some other permanent 
-# error associated with the specific system call). All audit records will be tagged with the 
+# Monitor for unsuccessful attempts to access files. The parameters below are associated with
+# system calls that control creation ( creat ), opening ( open , openat ) and truncation
+# ( truncate , ftruncate ) of files. An audit log record will only be written if the user is a
+# non- privileged user (auid >= 1000), is not a Daemon event (auid=4294967295) and if the
+# system call returned EACCES (permission denied to the file) or EPERM (some other permanent
+# error associated with the specific system call). All audit records will be tagged with the
 # identifier "access."
 #
 # Rationale:
-# Failed attempts to open, create or truncate files could be an indication that an individual 
+# Failed attempts to open, create or truncate files could be an indication that an individual
 # or process is trying to gain unauthorized access to the system.
 #
 # @param enforce
@@ -56,7 +56,7 @@ class cis_security_hardening::rules::auditd_access (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '20' {
+        if $facts['os']['release']['major'] >= 20 {
           $content_rule1 = "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
           $content_rule2 = "-a always,exit -F arch=b32 -S creat,open,openat,truncate,ftruncate -F exit=-EPERM -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars
           $content_rule3 = "-a always,exit -F arch=b64 -S creat,open,openat,truncate,ftruncate -F exit=-EACCES -F auid>=${uid} -F auid!=${auid} -k access" #lint:ignore:140chars

@@ -1,11 +1,11 @@
-# @summary 
+# @summary
 #    Ensure successful and unsuccessful uses of the finit_module syscall are recorded
 #
 # The operating system must generate audit records for successful/unsuccessful uses of the finit_module syscall.
 #
 # Rationale:
-# Without generating audit records that are specific to the security and mission needs of the organization, it 
-# would be difficult to establish, correlate, and investigate the events relating to an incident or identify 
+# Without generating audit records that are specific to the security and mission needs of the organization, it
+# would be difficult to establish, correlate, and investigate the events relating to an incident or identify
 # those responsible for one.
 #
 # Audit records can be generated from various components within the information system (e.g., module or policy filter).
@@ -29,7 +29,7 @@ class cis_security_hardening::rules::auditd_finit_module_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == 7 {
       $rule1 = '-a always,exit -F arch=b32 -S finit_module -k module-change'
       $rule2 = '-a always,exit -F arch=b64 -S finit_module -k module-change'
     } else {

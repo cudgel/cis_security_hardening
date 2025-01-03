@@ -1,8 +1,8 @@
-# @summary 
-#    Ensure password creation requirements are configured 
+# @summary
+#    Ensure password creation requirements are configured
 #
-# The pam_pwquality.so module checks the strength of passwords. It performs checks such as making sure a password is not a 
-# dictionary word, it is a certain length, contains a mix of characters (e.g. alphabet, numeric, other) and more. The 
+# The pam_pwquality.so module checks the strength of passwords. It performs checks such as making sure a password is not a
+# dictionary word, it is a certain length, contains a mix of characters (e.g. alphabet, numeric, other) and more. The
 # following are definitions of the pam_pwquality .so options.
 #
 # - try_first_pass - retrieve the password from a previous stacked PAM module. If not available, then prompt the user for a password.
@@ -39,7 +39,7 @@
 #    Minimum number of lower case characters a password must contain
 #
 # @param minclass
-#    Minimum to provide character classes (only used for Redhat 8, ignored in oler RedHat versios). 
+#    Minimum to provide character classes (only used for Redhat 8, ignored in oler RedHat versios).
 #    Will be ignored if value is -1. Instead *credit values are used.
 #
 # @param retry
@@ -200,7 +200,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
         }
 
         $services.each | $service | {
-          if ($facts['os']['release']['major'] > '7') {
+          if ($facts['os']['release']['major'] > 7) {
             if $pf_path != '' {
               $pf_file = "${pf_path}/${service}"
 
@@ -216,7 +216,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
                 notify    => Exec['authselect-apply-changes'],
               }
             }
-          } elsif($facts['os']['release']['major'] == '7') {
+          } elsif($facts['os']['release']['major'] == 7) {
             Pam { "pam-${service}-requisite":
               ensure    => present,
               service   => $service,
@@ -240,7 +240,7 @@ class cis_security_hardening::rules::pam_pw_requirements (
       }
       'debian' : {
         if ($facts['os']['name'].downcase() == 'debian' and
-        $facts['os']['release']['major'] > '10') or
+        $facts['os']['release']['major'] > 10) or
         ($facts['os']['name'].downcase() == 'ubuntu' and
         $facts['os']['release']['major'] >= '22') {
           $pkg_opts = {

@@ -1,15 +1,15 @@
-# @summary 
-#    Ensure lockout for failed password attempts is configured 
+# @summary
+#    Ensure lockout for failed password attempts is configured
 #
-# Lock out users after n unsuccessful consecutive login attempts. The first sets of changes are made to the PAM 
-# configuration files. The second set of changes are applied to the program specific PAM configuration file. The 
-# second set of changes must be applied to each program that will lock out users. Check the documentation for each 
+# Lock out users after n unsuccessful consecutive login attempts. The first sets of changes are made to the PAM
+# configuration files. The second set of changes are applied to the program specific PAM configuration file. The
+# second set of changes must be applied to each program that will lock out users. Check the documentation for each
 # secondary program for instructions on how to configure them to work with PAM.
 #
 # Set the lockout number to the policy in effect at your site.
 #
 # Rationale:
-# Locking out user IDs after n unsuccessful consecutive login attempts mitigates brute force password attacks against 
+# Locking out user IDs after n unsuccessful consecutive login attempts mitigates brute force password attacks against
 # your systems.
 #
 # @param enforce
@@ -61,8 +61,8 @@ class cis_security_hardening::rules::pam_lockout (
           $pf_path = ''
         }
 
-        if $facts['os']['release']['major'] > '7' {
-          if $facts['os']['release']['major'] == '8' {
+        if $facts['os']['release']['major'] > 7 {
+          if $facts['os']['release']['major'] == 8 {
             $services.each | $service | {
               $pf_file = "${pf_path}/${service}"
 
@@ -136,7 +136,7 @@ class cis_security_hardening::rules::pam_lockout (
           }
         }
 
-        if ($facts['os']['release']['major'] == '7') {
+        if ($facts['os']['release']['major'] == 7) {
           if ($fail_interval > 0) {
             $fail = "fail_interval=${fail_interval} "
           } else {
@@ -212,7 +212,7 @@ class cis_security_hardening::rules::pam_lockout (
         }
       }
       'debian': {
-        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') or
+        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > 10) or
         ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '22') {
           require cis_security_hardening::rules::pam_pw_requirements
 

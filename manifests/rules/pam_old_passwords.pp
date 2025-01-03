@@ -1,13 +1,13 @@
-# @summary 
-#    Ensure password reuse is limited 
+# @summary
+#    Ensure password reuse is limited
 #
-# The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users 
+# The /etc/security/opasswd file stores the users' old passwords and can be checked to ensure that users
 # are not recycling recent passwords.
 #
 # Rationale:
-# Forcing users not to reuse their past 5 passwords make it less likely that an attacker will be able to 
+# Forcing users not to reuse their past 5 passwords make it less likely that an attacker will be able to
 # guess the password.
-# 
+#
 # Note that these change only apply to accounts configured on the local system.
 #
 # @param enforce
@@ -57,7 +57,7 @@ class cis_security_hardening::rules::pam_old_passwords (
           $pf_path = ''
         }
 
-        if ($facts['os']['release']['major'] > '7') {
+        if ($facts['os']['release']['major'] > 7) {
           if $pf_path != '' {
             $pf_file = "${pf_path}/system-auth"
 
@@ -124,7 +124,7 @@ class cis_security_hardening::rules::pam_old_passwords (
         }
       }
       'debian', 'suse': {
-        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > '10') {
+        if ($facts['os']['name'].downcase() == 'debian' and $facts['os']['release']['major'] > 10) {
           Pam { 'pam-common-password-requisite-pwhistory':
             ensure    => present,
             service   => 'common-password',
@@ -134,7 +134,7 @@ class cis_security_hardening::rules::pam_old_passwords (
             position  => 'before *[type="password" and module="pam_unix.so"]',
             arguments => ['use_authok', "remember=${oldpasswords}"],
           }
-        } elsif ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20') {
+        } elsif ($facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= 20) {
           Pam { 'ubuntu-remember-old-pw':
             ensure           => present,
             service          => 'common-password',

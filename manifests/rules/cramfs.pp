@@ -29,7 +29,7 @@ class cis_security_hardening::rules::cramfs (
         kmod::blacklist { 'cramfs': }
       }
       'redhat': {
-        if $facts['os']['release']['major'] > '7' {
+        if $facts['os']['release']['major'] > 7 {
           kmod::install { 'cramfs':
             command => '/bin/false',
           }
@@ -41,7 +41,7 @@ class cis_security_hardening::rules::cramfs (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] > '10' {
+        if $facts['os']['release']['major'] > 10 {
           kmod::install { 'cramfs':
             command => '/bin/false',
           }
@@ -53,7 +53,7 @@ class cis_security_hardening::rules::cramfs (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '20' {
+        if $facts['os']['release']['major'] >= 20 {
           kmod::install { 'cramfs':
             command => '/bin/false',
           }

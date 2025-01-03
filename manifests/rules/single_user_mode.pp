@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure authentication required for single user mode 
+# @summary
+#    Ensure authentication required for single user mode
 #
-# Single user mode (rescue mode) is used for recovery when the system detects an issue during boot 
+# Single user mode (rescue mode) is used for recovery when the system detects an issue during boot
 # or by manual selection from the bootloader.
 #
 # Rationale:
-# Requiring authentication in single user mode (rescue mode) prevents an unauthorized user from 
+# Requiring authentication in single user mode (rescue mode) prevents an unauthorized user from
 # rebooting the system into single user to gain root privileges without credentials.
 #
 # @param enforce
@@ -27,7 +27,7 @@ class cis_security_hardening::rules::single_user_mode (
           '9': {
             # nothing to do
           }
-          '8': {
+          8: {
             file_line { 'su-rescue':
               path  => '/usr/lib/systemd/system/rescue.service',
               line  => 'ExecStart=-/usr/lib/systemd/systemd-sulogin-shell rescue',
@@ -39,7 +39,7 @@ class cis_security_hardening::rules::single_user_mode (
               match => '^ExecStart=',
             }
           }
-          '7': {
+          7: {
             file_line { 'su-rescue':
               path  => '/usr/lib/systemd/system/rescue.service',
               line  => 'ExecStart=-/bin/sh -c "/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"',

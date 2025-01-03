@@ -1,15 +1,15 @@
 # @summary
-#    Ensure system administrator actions (sudolog) are collected 
+#    Ensure system administrator actions (sudolog) are collected
 #
-# Monitor the sudo log file. If the system has been properly configured to disable the use 
-# of the su command and force all administrators to have to log in first and then use sudo 
-# to execute privileged commands, then all administrator commands will be logged to /var/log/sudo.log. 
-# Any time a command is executed, an audit event will be triggered as the /var/log/sudo.log file will 
+# Monitor the sudo log file. If the system has been properly configured to disable the use
+# of the su command and force all administrators to have to log in first and then use sudo
+# to execute privileged commands, then all administrator commands will be logged to /var/log/sudo.log.
+# Any time a command is executed, an audit event will be triggered as the /var/log/sudo.log file will
 # be opened for write and the executed administration command will be written to the log.
 #
 # Rationale:
-# Changes in /var/log/sudo.log indicate that an administrator has executed a command or the log file 
-# itself has been tampered with. Administrators will want to correlate the events written to the audit 
+# Changes in /var/log/sudo.log indicate that an administrator has executed a command or the log file
+# itself has been tampered with. Administrators will want to correlate the events written to the audit
 # trail with the records written to /var/log/sudo.log to verify if unauthorized commands have been executed.
 #
 # @param enforce
@@ -31,7 +31,7 @@ class cis_security_hardening::rules::auditd_actions (
     }
     case $facts['os']['name'].downcase() {
       'redhat', 'centos', 'almalinux', 'rocky': {
-        if $facts['os']['release']['major'] >= '8' {
+        if $facts['os']['release']['major'] >= 8 {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,
@@ -54,7 +54,7 @@ class cis_security_hardening::rules::auditd_actions (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '20' {
+        if $facts['os']['release']['major'] >= 20 {
           concat::fragment { 'watch admin actions rule 1':
             order   => 21,
             target  => $cis_security_hardening::rules::auditd_init::rules_file,

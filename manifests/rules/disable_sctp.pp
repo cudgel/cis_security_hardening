@@ -25,7 +25,7 @@ class cis_security_hardening::rules::disable_sctp (
   if $enforce {
     case $facts['os']['name'].downcase() {
       'debian': {
-        if $facts['os']['release']['major'] > '10' {
+        if $facts['os']['release']['major'] > 10 {
           $command = '/bin/false'
           kmod::blacklist { 'sctp': }
         } else {
@@ -33,7 +33,7 @@ class cis_security_hardening::rules::disable_sctp (
         }
       }
       'ubuntu': {
-        if $facts['os']['release']['major'] >= '20' {
+        if $facts['os']['release']['major'] >= 20 {
           $command = '/bin/false'
           kmod::blacklist { 'sctp': }
         } else {

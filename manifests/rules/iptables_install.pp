@@ -1,7 +1,7 @@
 # @summary
-#    Ensure iptables is installed 
+#    Ensure iptables is installed
 #
-# iptables allows configuration of the IPv4 tables in the linux kernel and the rules stored within them. 
+# iptables allows configuration of the IPv4 tables in the linux kernel and the rules stored within them.
 # Most firewall configuration utilities operate as a front end to iptables.
 #
 # Rationale:
@@ -41,14 +41,14 @@ class cis_security_hardening::rules::iptables_install (
       }
     }
 
-    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= '20' {
+    if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= 20 {
       ensure_packages(['iptables-persistent'], {
           ensure => installed,
       })
     }
 
     if ($facts['os']['name'].downcase() == 'redhat' or $facts['os']['name'].downcase() == 'centos') and
-    $facts['os']['release']['major'] > '7' {
+    $facts['os']['release']['major'] > 7 {
       $params_rh = {
         service_name => ['iptables'],
         service_name_v6 => 'ip6tables',

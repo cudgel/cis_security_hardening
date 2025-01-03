@@ -4,8 +4,8 @@
 # The operating system must generate audit records for successful/unsuccessful uses of the chsh command.
 #
 # Rationale:
-# Without generating audit records that are specific to the security and mission needs of the organization, 
-# it would be difficult to establish, correlate, and investigate the events relating to an incident or identify 
+# Without generating audit records that are specific to the security and mission needs of the organization,
+# it would be difficult to establish, correlate, and investigate the events relating to an incident or identify
 # those responsible for one.
 #
 # Audit records can be generated from various components within the information system (e.g., module or policy filter).
@@ -27,7 +27,7 @@ class cis_security_hardening::rules::auditd_chsh_use (
       undef => '1000',
       default => fact('cis_security_hardening.auditd.uid_min'),
     }
-    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == '7' {
+    if $facts['os']['name'].downcase() == 'redhat' and $facts['os']['release']['major'] == 7 {
       $rule1 = "-a always,exit -F path=/usr/bin/chsh -F auid>=${uid} -F auid!=4294967295 -k priv_cmd"
     } else {
       $rule1 = "-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=${uid} -F auid!=4294967295 -k priv_cmd"
