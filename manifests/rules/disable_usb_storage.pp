@@ -26,19 +26,19 @@ class cis_security_hardening::rules::disable_usb_storage (
     case $facts['os']['name'].downcase() {
       'debian': {
         if $facts['os']['release']['major'] > 10 {
-          $command = '/bin/false'
+          $command = '/bin/true'
           kmod::blacklist { 'usb-storage': }
         } else {
           $command = '/bin/true'
         }
       }
       'centos': {
-        $command = '/bin/false'
+        $command = '/bin/true'
         kmod::blacklist { 'usb-storage': }
       }
       'redhat': {
         if $facts['os']['release']['major'] > 8 {
-          $command = '/bin/false'
+          $command = '/bin/true'
           kmod::blacklist { 'usb-storage': }
         } else {
           $command = '/bin/true'
@@ -46,7 +46,7 @@ class cis_security_hardening::rules::disable_usb_storage (
       }
       'ubuntu': {
         if $facts['os']['name'].downcase() == 'ubuntu' and $facts['os']['release']['major'] >= 20 {
-          $command = '/bin/false'
+          $command = '/bin/true'
           kmod::blacklist { 'usb-storage': }
         } else {
           $command = '/bin/true'

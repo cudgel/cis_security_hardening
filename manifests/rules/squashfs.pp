@@ -25,14 +25,14 @@ class cis_security_hardening::rules::squashfs (
     case $facts['os']['name'].downcase() {
       'rocky', 'almalinux', 'centos': {
         kmod::install { 'squashfs':
-          command => '/bin/false',
+          command => '/bin/true',
         }
         kmod::blacklist { 'squashfs': }
       }
       'redhat': {
         if $facts['os']['release']['major'] > 7 {
           kmod::install { 'squashfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'squashfs': }
         } else {
@@ -44,7 +44,7 @@ class cis_security_hardening::rules::squashfs (
       'debian': {
         if $facts['os']['release']['major'] > 10 {
           kmod::install { 'squashfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'squashfs': }
         } else {
@@ -56,7 +56,7 @@ class cis_security_hardening::rules::squashfs (
       'ubuntu': {
         if $facts['os']['release']['major'] >= 20 {
           kmod::install { 'squashfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'squashfs': }
         } else {

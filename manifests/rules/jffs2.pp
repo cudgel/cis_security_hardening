@@ -25,7 +25,7 @@ class cis_security_hardening::rules::jffs2 (
       'ubuntu': {
         if $facts['os']['release']['major'] >= 20 {
           kmod::install { 'jffs2':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'jffs2': }
         } else {
@@ -36,14 +36,14 @@ class cis_security_hardening::rules::jffs2 (
       }
       'centos': {
         kmod::install { 'jffs2':
-          command => '/bin/false',
+          command => '/bin/true',
         }
         kmod::blacklist { 'jffs2': }
       }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           kmod::install { 'jffs2':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'jffs2': }
         } else {

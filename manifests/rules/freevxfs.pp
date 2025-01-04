@@ -25,7 +25,7 @@ class cis_security_hardening::rules::freevxfs (
       'ubuntu': {
         if $facts['os']['release']['major'] >= 20 {
           kmod::install { 'freevxfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'freevxfs': }
         } else {
@@ -36,14 +36,14 @@ class cis_security_hardening::rules::freevxfs (
       }
       'centos': {
         kmod::install { 'freevxfs':
-          command => '/bin/false',
+          command => '/bin/true',
         }
         kmod::blacklist { 'freevxfs': }
       }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           kmod::install { 'freevxfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'freevxfs': }
         } else {

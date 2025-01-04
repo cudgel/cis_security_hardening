@@ -26,14 +26,14 @@ class cis_security_hardening::rules::udf (
     case $facts['os']['name'].downcase() {
       'rocky', 'almalinux', 'centos': {
         kmod::install { 'udf':
-          command => '/bin/false',
+          command => '/bin/true',
         }
         kmod::blacklist { 'udf': }
       }
       'redhat': {
         if $facts['os']['release']['major'] > 7 {
           kmod::install { 'udf':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'udf': }
         } else {
@@ -45,7 +45,7 @@ class cis_security_hardening::rules::udf (
       'debian': {
         if $facts['os']['release']['major'] > 10 {
           kmod::install { 'udf':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'udf': }
         } else {
@@ -57,7 +57,7 @@ class cis_security_hardening::rules::udf (
       'ubuntu': {
         if $facts['os']['release']['major'] >= 20 {
           kmod::install { 'udf':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'udf': }
         } else {

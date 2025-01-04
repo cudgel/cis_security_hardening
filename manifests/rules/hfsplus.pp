@@ -26,7 +26,7 @@ class cis_security_hardening::rules::hfsplus (
       'ubuntu': {
         if $facts['os']['release']['major'] >= 20 {
           kmod::install { 'hfsplus':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'hfsplus': }
         } else {
@@ -37,14 +37,14 @@ class cis_security_hardening::rules::hfsplus (
       }
       'centos': {
         kmod::install { 'hfsplus':
-          command => '/bin/false',
+          command => '/bin/true',
         }
         kmod::blacklist { 'hfsplus': }
       }
       'debian': {
         if $facts['os']['release']['major'] >= '12' {
           kmod::install { 'hfsplus':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'hfsplus': }
         } else {

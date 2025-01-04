@@ -24,7 +24,7 @@ class cis_security_hardening::rules::disable_tipc (
     case $facts['os']['name'].downcase() {
       'debian': {
         if $facts['os']['release']['major'] > 10 {
-          $command = '/bin/false'
+          $command = '/bin/true'
           kmod::blacklist { 'tipc': }
         } else {
           $command = '/bin/true'
@@ -32,7 +32,7 @@ class cis_security_hardening::rules::disable_tipc (
       }
       'redhat': {
         if $facts['os']['release']['major'] > 8 {
-          $command = '/bin/false'
+          $command = '/bin/true'
           kmod::blacklist { 'tipc': }
         } else {
           $command = '/bin/true'
@@ -40,7 +40,7 @@ class cis_security_hardening::rules::disable_tipc (
       }
       'ubuntu': {
         if $facts['os']['release']['major'] >= 20 {
-          $command = '/bin/false'
+          $command = '/bin/true'
           kmod::blacklist { 'tipc': }
         } else {
           $command = '/bin/true'
