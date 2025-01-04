@@ -48,7 +48,7 @@ class cis_security_hardening::rules::disable_bluetooth (
         }
       }
       'debian': {
-        if $facts['os']['release']['major'] >= '12' {
+        if $facts['os']['release']['major'] >= 12 {
           service { 'bluetooth.service':
             ensure => 'stopped',
             enable => false,

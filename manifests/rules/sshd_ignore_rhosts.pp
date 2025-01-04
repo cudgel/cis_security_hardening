@@ -1,7 +1,7 @@
-# @summary 
-#    Ensure SSH IgnoreRhosts is enabled 
+# @summary
+#    Ensure SSH IgnoreRhosts is enabled
 #
-# The IgnoreRhosts parameter specifies that .rhosts and .shosts files will not be used in RhostsRSAAuthentication 
+# The IgnoreRhosts parameter specifies that .rhosts and .shosts files will not be used in RhostsRSAAuthentication
 # or HostbasedAuthentication .
 #
 # Rationale:
@@ -20,7 +20,7 @@ class cis_security_hardening::rules::sshd_ignore_rhosts (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

@@ -1,16 +1,16 @@
-# @summary 
-#    Ensure SSH MaxAuthTries is set to 4 or less 
+# @summary
+#    Ensure SSH MaxAuthTries is set to 4 or less
 #
-# The MaxAuthTries parameter specifies the maximum number of authentication attempts permitted per connection. 
-# When the login failure count reaches half the number, error messages will be written to the syslog file 
+# The MaxAuthTries parameter specifies the maximum number of authentication attempts permitted per connection.
+# When the login failure count reaches half the number, error messages will be written to the syslog file
 # detailing the login failure.
 #
 # Rationale:
-# Setting the MaxAuthTries parameter to a low number will minimize the risk of successful brute force attacks to 
+# Setting the MaxAuthTries parameter to a low number will minimize the risk of successful brute force attacks to
 # the SSH server. While the recommended setting is 4, set the number based on site policy.
 #
 # @param enforce
-#    Enforce the rule 
+#    Enforce the rule
 #
 # @param max_auth_tries
 #    Maximun number of failed authentication attempts
@@ -27,7 +27,7 @@ class cis_security_hardening::rules::sshd_max_auth_tries (
   Integer $max_auth_tries = 4,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

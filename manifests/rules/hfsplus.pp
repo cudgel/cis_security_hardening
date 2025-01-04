@@ -42,7 +42,7 @@ class cis_security_hardening::rules::hfsplus (
         kmod::blacklist { 'hfsplus': }
       }
       'debian': {
-        if $facts['os']['release']['major'] >= '12' {
+        if $facts['os']['release']['major'] >= 12 {
           kmod::install { 'hfsplus':
             command => '/bin/true',
           }

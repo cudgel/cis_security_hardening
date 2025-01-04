@@ -1,11 +1,11 @@
-# @summary 
-#    Ensure SSH PermitEmptyPasswords is disabled 
+# @summary
+#    Ensure SSH PermitEmptyPasswords is disabled
 #
-# The PermitEmptyPasswords parameter specifies if the SSH server allows login to accounts with 
+# The PermitEmptyPasswords parameter specifies if the SSH server allows login to accounts with
 # empty password strings.
 #
 # Rationale:
-# Disallowing remote shell access to accounts that have an empty password reduces the probability 
+# Disallowing remote shell access to accounts that have an empty password reduces the probability
 # of unauthorized access to the system
 #
 # @param enforce
@@ -21,7 +21,7 @@ class cis_security_hardening::rules::sshd_empty_passwords (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

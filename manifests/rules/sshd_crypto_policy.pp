@@ -1,10 +1,10 @@
-# @summary 
-#    Ensure system-wide crypto policy is not over-ridden 
+# @summary
+#    Ensure system-wide crypto policy is not over-ridden
 #
 # System-wide Crypto policy can be over-ridden or opted out of for openSSH.
 #
 # Rationale:
-# Over-riding or opting out of the system-wide crypto policy could allow for the use of 
+# Over-riding or opting out of the system-wide crypto policy could allow for the use of
 # less secure Ciphers, MACs, KexAlgoritms and GSSAPIKexAlgorithsm.
 #
 # @param enforce
@@ -20,7 +20,7 @@ class cis_security_hardening::rules::sshd_crypto_policy (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

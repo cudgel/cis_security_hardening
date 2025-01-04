@@ -1,14 +1,14 @@
-# @summary 
-#    Ensure SSH PAM is enabled 
+# @summary
+#    Ensure SSH PAM is enabled
 #
-# UsePAM Enables the Pluggable Authentication Module interface. If set to “yes” this will 
-# enable PAM authentication using ChallengeResponseAuthentication and PasswordAuthentication 
+# UsePAM Enables the Pluggable Authentication Module interface. If set to “yes” this will
+# enable PAM authentication using ChallengeResponseAuthentication and PasswordAuthentication
 # in addition to PAM account and session module processing for all authentication types.
 #
 # Rationale:
-# When usePAM is set to yes, PAM runs through account and session types properly. This is 
-# important if you want to restrict access to services based off of IP, time or other factors 
-# of the account. Additionally, you can make sure users inherit certain environment variables 
+# When usePAM is set to yes, PAM runs through account and session types properly. This is
+# important if you want to restrict access to services based off of IP, time or other factors
+# of the account. Additionally, you can make sure users inherit certain environment variables
 # on login or disallow access to the server
 #
 # @param enforce
@@ -24,7 +24,7 @@ class cis_security_hardening::rules::sshd_use_pam (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

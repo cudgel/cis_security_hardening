@@ -1,13 +1,13 @@
-# @summary 
-#    Ensure SSH LoginGraceTime is set to one minute or less 
+# @summary
+#    Ensure SSH LoginGraceTime is set to one minute or less
 #
-# The LoginGraceTime parameter specifies the time allowed for successful authentication to the SSH server. 
-# The longer the Grace period is the more open unauthenticated connections can exist. Like other session 
-# controls in this session the Grace Period should be limited to appropriate organizational limits to 
+# The LoginGraceTime parameter specifies the time allowed for successful authentication to the SSH server.
+# The longer the Grace period is the more open unauthenticated connections can exist. Like other session
+# controls in this session the Grace Period should be limited to appropriate organizational limits to
 # ensure the service is available for needed access.
 # Rationale:
-# Setting the LoginGraceTime parameter to a low number will minimize the risk of successful brute force attacks 
-# to the SSH server. It will also limit the number of concurrent unauthenticated connections While the recommended 
+# Setting the LoginGraceTime parameter to a low number will minimize the risk of successful brute force attacks
+# to the SSH server. It will also limit the number of concurrent unauthenticated connections While the recommended
 # setting is 60 seconds (1 Minute), set the number based on site policy.
 #
 # @param enforce
@@ -28,7 +28,7 @@ class cis_security_hardening::rules::sshd_login_gracetime (
   Integer $login_grace_time = 60,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

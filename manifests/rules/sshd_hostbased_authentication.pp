@@ -1,12 +1,12 @@
-# @summary 
-#    Ensure SSH HostbasedAuthentication is disabled 
+# @summary
+#    Ensure SSH HostbasedAuthentication is disabled
 #
-# The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user 
-# of .rhosts , or /etc/hosts.equiv , along with successful public key client host authentication. This option only 
+# The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user
+# of .rhosts , or /etc/hosts.equiv , along with successful public key client host authentication. This option only
 # applies to SSH Protocol Version 2.
 #
 # Rationale:
-# Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf , disabling the ability to 
+# Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf , disabling the ability to
 # use .rhosts files in SSH provides an additional layer of protection .
 #
 # @param enforce
@@ -22,7 +22,7 @@ class cis_security_hardening::rules::sshd_hostbased_authentication (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }

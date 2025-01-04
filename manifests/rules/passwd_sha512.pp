@@ -1,12 +1,12 @@
 # @summary
 #    Ensure ENCRYPT_METHOD is SHA512
 #
-# The operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic 
+# The operating system must encrypt all stored passwords with a FIPS 140-2 approved cryptographic
 # hashing algorithm.
 #
 # Rationale:
-# Passwords need to be protected at all times, and encryption is the standard method for protecting 
-# passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily 
+# Passwords need to be protected at all times, and encryption is the standard method for protecting
+# passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily
 # compromised.
 #
 # @param enforce
@@ -22,7 +22,7 @@ class cis_security_hardening::rules::passwd_sha512 (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true  => '/usr/etc/login.defs',
       false => '/etc/login.defs',
     }

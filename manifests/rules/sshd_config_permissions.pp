@@ -1,7 +1,7 @@
-# @summary 
-#    Ensure permissions on /etc/ssh/sshd_config are configured 
+# @summary
+#    Ensure permissions on /etc/ssh/sshd_config are configured
 #
-# The /etc/ssh/sshd_config file contains configuration specifications for sshd. The command below sets 
+# The /etc/ssh/sshd_config file contains configuration specifications for sshd. The command below sets
 # the owner and group of the file to root.
 #
 # Rationale:
@@ -20,7 +20,7 @@ class cis_security_hardening::rules::sshd_config_permissions (
   Boolean $enforce = false,
 ) {
   if $enforce {
-    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == '12') ? {
+    $path = ($facts['os']['name'] == 'SLES' and $facts['os']['release']['major'] == 12) ? {
       true    => '/usr/etc/ssh/sshd_config',
       default => '/etc/ssh/sshd_config',
     }
