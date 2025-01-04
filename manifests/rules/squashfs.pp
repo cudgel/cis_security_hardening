@@ -44,7 +44,7 @@ class cis_security_hardening::rules::squashfs (
       'debian': {
         if $facts['os']['release']['major'] > '10' {
           kmod::install { 'squashfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'squashfs': }
         } else {
