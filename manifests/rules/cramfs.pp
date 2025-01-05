@@ -55,7 +55,7 @@ class cis_security_hardening::rules::cramfs (
       'ubuntu': {
         if $facts['os']['release']['major'] >= '20' {
           kmod::install { 'cramfs':
-            command => '/bin/false',
+            command => '/bin/true',
           }
           kmod::blacklist { 'cramfs': }
         } else {
